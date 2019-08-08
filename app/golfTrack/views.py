@@ -1,9 +1,15 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.template import loader
+from django.shortcuts import render
 from .models import Course
 
 def index(request):
-    return HttpResponse("This is the index")
+    courses = Course.objects.all()
+    context = {
+        'courses': courses,
+    }
+    return render(request, 'golfTrack/index.html', context)
 
 def course_list(request):
     courses = Course.objects.all()
